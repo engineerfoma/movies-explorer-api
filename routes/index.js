@@ -3,17 +3,19 @@ const cors = require('cors');
 
 const routes = express.Router();
 
+const { userRoutes } = require('./users');
+const { movieRoutes } = require('./movies');
 const { auth } = require('../middlewares/auth');
-const { validateAuthentication, validateUserBody } = require('../middlewares/validations');
+const {
+  validateAuthentication,
+  validateUserBody,
+} = require('../middlewares/validations');
 const {
   createUser,
   login,
-  getUserInfo,
-  updateUserProfile,
   signOut,
 } = require('../controllers/users');
 
-const { getMovies, setMovies } = require('../controllers/movies');
 const { NotFoundError } = require('../errors/not-found-err');
 
 routes.use(cors({
@@ -34,14 +36,9 @@ routes.get('/crash-test', () => {
 
 routes.post('/signup', validateUserBody, createUser);
 routes.post('/signin', validateAuthentication, login);
-
 routes.use(auth);
-
-routes.get('/users/me', getUserInfo);
-routes.patch('/users/me', updateUserProfile);
-routes.get('/movies', getMovies);
-routes.post('/movies', setMovies);
-routes.delete('/movies/_id', removeMovie);
+routes.use('/users', userRoutes);
+routes.use('/movies', movieRoutes);
 routes.get('/signout', signOut);
 
 routes.use((req, res, next) => {
