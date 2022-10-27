@@ -25,20 +25,20 @@ const setMovie = async (req, res, next) => {
 };
 
 const deleteMovieById = async (req, res, next) => {
-  const { cardId } = req.params;
+  const { movieId } = req.params;
   const currentUserId = req.user._id;
   try {
-    const card = await Movie.findById(cardId);
-    if (!card) {
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
       return next(new NotFoundError('карточка не найдена'));
     }
-    const cardOwner = card.owner._id.toString();
-    if (cardOwner !== currentUserId) {
+    const movieOwner = movie.owner._id.toString();
+    if (movieOwner !== currentUserId) {
       return next(new ForbiddenError('Не хватает прав на удаление чужой карточки!'));
     }
-    await Movie.findByIdAndDelete(cardId);
+    await Movie.findByIdAndDelete(movieId);
 
-    return res.status(200).send(card);
+    return res.status(200).send(movie);
   } catch (e) {
     if (e.name === 'CastError') {
       return next(new BadRequestError('Ошибка в запросе'));
