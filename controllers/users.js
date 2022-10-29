@@ -22,7 +22,7 @@ const createUser = async (req, res, next) => {
       password: hashePassword,
       name,
     });
-    return res.status(200).send(user.toObject());
+    return res.send(user.toObject());
   } catch (e) {
     if (e.name === 'ValidationError') {
       return next(new BadRequestError('Ошибка в запросе'));
@@ -78,7 +78,7 @@ const getUserInfo = async (req, res, next) => {
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
-    return res.status(200).send(users);
+    return res.send(users);
   } catch (e) {
     return next(e);
   }
@@ -97,8 +97,11 @@ const updateUserProfile = async (req, res, next) => {
     if (!user) {
       return next(new NotFoundError('Пользователь не найден'));
     }
-    return res.status(200).send(user);
+    return res.send(user);
   } catch (e) {
+    if (e.code === 11000) {
+      return next(new ConflictError('Не достаточно прав'));
+    }
     if (e.name === 'ValidationError') {
       return next(new BadRequestError('Ошибка в запросе'));
     }

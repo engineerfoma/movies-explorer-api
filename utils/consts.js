@@ -1,9 +1,15 @@
-const validURL = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/;
-const validRU = /[А-ЯËа-яё0-9]/;
-const validEN = /^[A-Za-z0-9]/;
+const badReqErr = 400;
+const authErr = 401;
+const forbErr = 403;
+const notFoundErr = 404;
+const conflictErr = 409;
+const serverErr = 500;
 
 module.exports = {
-  validURL,
-  validRU,
-  validEN,
+  badReqErr,
+  authErr,
+  forbErr,
+  notFoundErr,
+  conflictErr,
+  serverErr,
 };

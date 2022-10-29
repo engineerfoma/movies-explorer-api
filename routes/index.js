@@ -22,8 +22,8 @@ const { NotFoundError } = require('../errors/not-found-err');
 
 routes.use(cors({
   origin: [
-    'https://movies.fmn.nomoredomains.icu/api',
-    'http://movies.fmn.nomoredomains.icu/api',
+    'https://movies.fmn.nomoredomains.icu/',
+    'http://movies.fmn.nomoredomains.icu/',
     'http://localhost:3000',
     'http://localhost',
   ],

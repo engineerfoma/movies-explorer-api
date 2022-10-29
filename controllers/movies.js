@@ -6,7 +6,7 @@ const { ForbiddenError } = require('../errors/forbidden-err');
 const getMovies = async (req, res, next) => {
   try {
     const movies = await Movie.find({});
-    return res.status(200).send(movies);
+    return res.send(movies);
   } catch (e) {
     return next(e);
   }
@@ -15,7 +15,7 @@ const getMovies = async (req, res, next) => {
 const setMovie = async (req, res, next) => {
   try {
     const movie = await Movie.create({ owner: req.user._id, ...req.body });
-    return res.status(200).send(movie);
+    return res.send(movie);
   } catch (e) {
     if (e.name === 'ValidationError') {
       return next(new BadRequestError('Ошибка в запросе'));
@@ -38,7 +38,7 @@ const deleteMovieById = async (req, res, next) => {
     }
     await Movie.findByIdAndDelete(movieId);
 
-    return res.status(200).send(movie);
+    return res.send(movie);
   } catch (e) {
     if (e.name === 'CastError') {
       return next(new BadRequestError('Ошибка в запросе'));

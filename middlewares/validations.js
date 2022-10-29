@@ -1,5 +1,6 @@
 const { Joi, celebrate } = require('celebrate');
-const { validURL, validRU, validEN } = require('../utils/consts');
+// const { validURL, validRU, validEN } = require('../utils/consts');
+const validator = require('validator');
 
 const validateAuthentication = celebrate({
   body: Joi.object().keys({
@@ -9,8 +10,8 @@ const validateAuthentication = celebrate({
 });
 const validateUserBody = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().required().email(),
+    name: Joi.string().min(2).max(30).required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
@@ -24,15 +25,25 @@ const validateUpdateUserBody = celebrate({
 
 const validateMovieBody = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(2).max(30),
-    director: Joi.string().min(2).max(30),
-    duration: Joi.number(),
-    year: Joi.string().min(4),
-    description: Joi.string().min(1).max(80),
-    image: Joi.string().regex(validURL),
-    trailer: Joi.string().regex(validURL),
-    nameRU: Joi.string().regex(validRU),
-    nameEN: Joi.string().regex(validEN),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле image заполнено некорректно');
+    }),
+    trailerLink: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле trailerLink заполнено некорректно');
+    }),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 
