@@ -1,5 +1,4 @@
 const { Joi, celebrate } = require('celebrate');
-// const { validURL, validRU, validEN } = require('../utils/consts');
 const validator = require('validator');
 
 const validateAuthentication = celebrate({
@@ -19,7 +18,7 @@ const validateUserBody = celebrate({
 const validateUpdateUserBody = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
@@ -42,6 +41,13 @@ const validateMovieBody = celebrate({
       }
       return helpers.message('Поле trailerLink заполнено некорректно');
     }),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле thumbnail заполнено некорректно');
+    }),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
@@ -49,7 +55,7 @@ const validateMovieBody = celebrate({
 
 const validateIdMovie = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().hex().alphanum().length(24),
+    movieId: Joi.string().hex().length(24),
   }),
 });
 
