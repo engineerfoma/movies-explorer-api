@@ -100,7 +100,7 @@ const updateUserProfile = async (req, res, next) => {
     return res.send(user);
   } catch (e) {
     if (e.code === 11000) {
-      return next(new ConflictError('Не достаточно прав'));
+      return next(new ConflictError('почтовый ящик уже используется'));
     }
     if (e.name === 'ValidationError') {
       return next(new BadRequestError('Ошибка в запросе'));
