@@ -19,7 +19,8 @@ app.use(cors({
   origin: [
     'https://movies.front.fmn.nomoredomains.club',
     'http://movies.front.fmn.nomoredomains.club',
-    // 'http://localhost:3000',
+    'https://localhost:3000',
+    'http://localhost:3000',
     // 'http://localhost:3001',
   ],
   credentials: true,
