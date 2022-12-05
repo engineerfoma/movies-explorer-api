@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 
 const routes = express.Router();
 
@@ -19,16 +18,6 @@ const {
 } = require('../controllers/users');
 
 const { NotFoundError } = require('../errors/not-found-err');
-
-routes.use(cors({
-  origin: [
-    'https://movies.front.fmn.nomoredomains.club',
-    'http://movies.front.fmn.nomoredomains.club',
-    'http://localhost:3000',
-    'http://localhost',
-  ],
-  credentials: true,
-}));
 
 routes.get('/crash-test', () => {
   setTimeout(() => {
