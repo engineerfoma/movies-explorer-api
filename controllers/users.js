@@ -85,6 +85,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const updateUserProfile = async (req, res, next) => {
+  console.log(req.body);
   const id = req.user._id;
   const { name, email } = req.body;
 
@@ -92,7 +93,7 @@ const updateUserProfile = async (req, res, next) => {
     const user = await User.findByIdAndUpdate(
       id,
       { name, email },
-      { new: true, runValidators: true },
+      // { new: true, runValidators: true },
     );
     if (!user) {
       return next(new NotFoundError('Пользователь не найден'));

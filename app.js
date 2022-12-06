@@ -11,7 +11,7 @@ const errorsHandler = require('./middlewares/errors');
 const { limiter } = require('./middlewares/rateLimiter');
 const { DB_LOCAL_PATH } = require('./utils/config');
 
-const { PORT = 3001, NODE_ENV, DB_PATH } = process.env;
+const { PORT = 3000, NODE_ENV, DB_PATH } = process.env;
 
 const app = express();
 
