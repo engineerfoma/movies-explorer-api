@@ -1,4 +1,3 @@
-require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { AuthorizationError } = require('../errors/authorization-err');
 const { JWT_LOCAL } = require('../utils/config');
@@ -8,7 +7,6 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const auth = async (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
-  console.log(req.cookies);
 
   try {
     payload = await jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : JWT_LOCAL);
