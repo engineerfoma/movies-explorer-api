@@ -4,7 +4,7 @@ const routes = express.Router();
 
 const { userRoutes } = require('./users');
 const { movieRoutes } = require('./movies');
-const auth = require('../middlewares/auth');
+const { auth } = require('../middlewares/auth');
 
 const {
   validateAuthentication,
