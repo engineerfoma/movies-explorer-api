@@ -66,7 +66,7 @@ const login = async (req, res, next) => {
 
 const getUserInfo = async (req, res, next) => {
   const userId = req.user._id;
-
+  console.log(req.body);
   try {
     const user = await User.findById(userId);
     return res.send(user);
@@ -85,7 +85,6 @@ const getUsers = async (req, res, next) => {
 };
 
 const updateUserProfile = async (req, res, next) => {
-  console.log(req.body);
   const id = req.user._id;
   const { name, email } = req.body;
 
