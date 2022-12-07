@@ -23,6 +23,9 @@ app.use(requestLogger);
 app.use(limiter);
 app.use(cors);
 app.use(routes);
+app.use(errorLogger);
+app.use(errors());
+app.use(errorsHandler);
 
 async function main() {
   await mongoose.connect(NODE_ENV === 'production' ? DB_PATH : DB_LOCAL_PATH, {
@@ -33,7 +36,3 @@ async function main() {
 }
 
 main();
-
-app.use(errorLogger);
-app.use(errors());
-app.use(errorsHandler);
