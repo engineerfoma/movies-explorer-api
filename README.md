@@ -6,6 +6,8 @@
 
 Адрес репозитория: https://github.com/engineerfoma/movies-explorer-api
 
-IP-адресс: 51.250.88.182
+IP-адресс: 51.250.95.49
 
 Backend: https://movies.fmn.nomoredomains.icu
+
+Frontend: https://movies.front.fmn.nomoredomains.club
