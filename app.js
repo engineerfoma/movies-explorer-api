@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
+// const cors = require('cors');
+const cors = require('./middlewares/cors');
 const { routes } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const cors = require('./middlewares/cors');
 const errorsHandler = require('./middlewares/errors');
 const { limiter } = require('./middlewares/rateLimiter');
 const { DB_LOCAL_PATH } = require('./utils/config');
@@ -22,17 +22,17 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 app.use(limiter);
-// app.use(cors);
-app.use(
-  cors({
-    origin: [
-      'http://localhost:3000',
-      'https://movies.front.fmn.nomoredomains.club',
-      'https://movies.fmn.nomoredomains.club',
-    ],
-    credentials: true,
-  }),
-);
+app.use(cors);
+// app.use(
+//   cors({
+//     origin: [
+//       'http://localhost:3000',
+//       'https://movies.front.fmn.nomoredomains.club',
+//       'https://movies.fmn.nomoredomains.club',
+//     ],
+//     credentials: true,
+//   }),
+// );
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
