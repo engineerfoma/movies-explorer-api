@@ -5,6 +5,7 @@ const { BadRequestError } = require('../errors/bad-request-err');
 const { NotFoundError } = require('../errors/not-found-err');
 const { AuthorizationError } = require('../errors/authorization-err');
 const { ConflictError } = require('../errors/conflict-err');
+const { JWT_LOCAL } = require('../utils/config');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -52,7 +53,7 @@ const login = async (req, res, next) => {
       return next(new AuthorizationError('Неправильные почта или пароль'));
     }
 
-    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'qwerty');
+    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_LOCAL);
     res.cookie('jwt', token, {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
@@ -67,7 +68,6 @@ const login = async (req, res, next) => {
 
 const getUserInfo = async (req, res, next) => {
   const userId = req.user._id;
-  console.log(req.body);
   try {
     const user = await User.findById(userId);
     return res.send(user);
