@@ -7,6 +7,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const auth = async (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
+  console.log(req.cookies);
 
   try {
     payload = await jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : JWT_LOCAL);
