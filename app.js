@@ -22,17 +22,12 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 app.use(limiter);
-app.use(cors({
-  origin: [
-    'https://movies.fmn.nomoredomains.icu/',
-    'https://movies.front.fmn.nomoredomains.club/',
-    'http://movies.fmn.nomoredomains.icu/',
-    'http://movies.front.fmn.nomoredomains.club/',
-    'http://localhost:3000',
-    'http://localhost',
-  ],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }),
+);
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
