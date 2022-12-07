@@ -27,7 +27,7 @@ routes.get('/crash-test', () => {
 
 routes.post('/signup', validateUserBody, createUser);
 routes.post('/signin', validateAuthentication, login);
-routes.use(auth);
+routes.use(auth());
 routes.use('/users', userRoutes);
 routes.use('/movies', movieRoutes);
 routes.get('/signout', signOut);
