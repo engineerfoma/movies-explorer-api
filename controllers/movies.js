@@ -5,7 +5,7 @@ const { ForbiddenError } = require('../errors/forbidden-err');
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({});
+    const movies = await Movie.find({ owner: req.user._id });
     return res.send(movies);
   } catch (e) {
     return next(e);
