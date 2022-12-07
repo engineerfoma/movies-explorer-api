@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { AuthorizationError } = require('../errors/authorization-err');
 const { JWT_LOCAL } = require('../utils/config');
