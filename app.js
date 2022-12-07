@@ -28,7 +28,7 @@ app.use(
     origin: [
       // 'http://localhost:3000',
       'https://movies.front.fmn.nomoredomains.club',
-      // 'https://movies.fmn.nomoredomains.club',
+      'https://movies.fmn.nomoredomains.club',
     ],
     credentials: true,
   }),
