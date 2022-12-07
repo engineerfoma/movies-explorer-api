@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
       SameSite: 'None',
       Secure: true,
     });
-    return res.send({ email });
+    return res.send(user);
   } catch (e) {
     return next(e);
   }
