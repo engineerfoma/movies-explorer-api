@@ -36,6 +36,7 @@ const createUser = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
+  console.dir(req.cookies);
   const {
     email,
     password,
