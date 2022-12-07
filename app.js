@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { routes } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('./middlewares/cors');
+// const cors = require('./middlewares/cors');
 const errorsHandler = require('./middlewares/errors');
 const { limiter } = require('./middlewares/rateLimiter');
 const { DB_LOCAL_PATH } = require('./utils/config');
@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 app.use(limiter);
-app.use(cors);
+// app.use(cors);
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
