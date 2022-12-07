@@ -57,7 +57,7 @@ const login = async (req, res, next) => {
     res.cookie('jwt', token, {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
-      SameSite: 'None',
+      sameSite: 'None',
       Secure: true,
     });
     return res.send({ email });
